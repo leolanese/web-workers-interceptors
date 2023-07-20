@@ -7,8 +7,14 @@ self.addEventListener('fetch', event => {
     const modifiedHeaders = new Headers(event.request.headers);
     modifiedHeaders.set('X-Custom-Header-2', 'A value from service-worker');
     modifiedHeaders.set('X-Custom-Header-3', 'Another value from service-wroker');
+    modifiedHeaders.set('X-Custom-Header-4', 'TO BE DELETED');
+
+    // Delete a header
+    headers.delete('My-Custom-Delete');
 
     const modifiedRequest = new Request(event.request.url, {
+      mode: 'cors',
+      credentials: 'omit',
       headers: modifiedHeaders,
     });
 
