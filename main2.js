@@ -5,9 +5,9 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
 
     const localCookie = document.cookie || 'default';
-    console.log('Cookies ', localCookie);
+    console.log('Cookies', localCookie);
 
-    navigator.serviceWorker.register('/service-worker.js').then(registration => {
+    navigator.serviceWorker.register('/service-worker.js', {scope: '/'}).then(registration => {
       console.log('ServiceWorker scope: ', registration.scope);
 
       fetch('https://jsonplaceholder.typicode.com/posts/1', {
@@ -18,6 +18,7 @@ if ('serviceWorker' in navigator) {
       })
         .then(response => response.json())
         .then(json => console.log('Fetch response', json));
+        
 
     }, (err) => {
       console.log('ServiceWorker registration failed: ', err);

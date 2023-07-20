@@ -1,6 +1,6 @@
 
 self.addEventListener('fetch', function (event) {
-
+    
     const request = event.request;
     const cookieHeader = request.headers.get('My-Custom-Cookie');
     const customHeader = request.headers.get('My-Custom-Header');
@@ -9,5 +9,4 @@ self.addEventListener('fetch', function (event) {
     console.log('Test Custom header from worker', customHeader);
 
     event.respondWith(fetch(request));
-    
 });
