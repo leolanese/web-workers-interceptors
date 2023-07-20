@@ -1,16 +1,20 @@
 // modify request headers before sending the request using the Fetch API.
 // This is useful when you want to add headers based on some dynamic information from the main webpage, 
 // such as user input or cookies.
+
+const test = document.cookie || 'default';
+
 if ('serviceWorker' in navigator) {
 
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
       .then(registration => {
+
           console.log('ServiceWorker scope: ', registration.scope);
 
           fetch('https://jsonplaceholder.typicode.com/posts/1', {
             headers: {
-              'X-Custom-Header-1': 'some value from main'
+              'X-Custom-Header-1': test
             }
           })
             .then(response => response.json())
@@ -31,13 +35,12 @@ if ('serviceWorker' in navigator) {
     });
   });
 
-
   // sending message to ww
   navigator.serviceWorker.ready.then(registration => {
     console.log('Service Worker registered ok');
     const message = {
       type: 'clientMessage',
-      data: 'Yay! Message from main :)',
+      data: test,
     };
     registration.active.postMessage(message);
   }).catch(error => {
