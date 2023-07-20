@@ -1,4 +1,6 @@
-
+// modify request headers before sending the request using the Fetch API.
+// This is useful when you want to add headers based on some dynamic information from the main webpage, 
+// such as user input or cookies.
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
 
@@ -7,11 +9,21 @@ if ('serviceWorker' in navigator) {
 
       fetch('https://jsonplaceholder.typicode.com/posts/1', {
         headers: {
-          'My-Custom-Header': 'my-custom-header'
+          'X-Custom-Header-1': 'some value from main'
         }
       })
         .then(response => response.json())
         .then(json => console.log('Fetch response', json));
+
+
+      // unregister
+      document.getElementById('unregisterButton').addEventListener('click', () => {
+        registration.unregister().then(function(success) {
+          console.log('Service worker unregistered', success);
+        }).catch(function(error) {
+          console.log('Service worker unregisteration error', error);
+        });
+      });  
 
 
     }, (err) => {

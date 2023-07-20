@@ -1,25 +1,27 @@
-self.addEventListener('fetch', function (event) {
+// runs in the background as a separate thread and intercepts network requests
+// It can modify request headers by intercepting and cloning the request using the Fetch API 
+// in the fetch event listener of the service worker.
+self.addEventListener('fetch', event => {
 
-    const localCookie = 'default';
-    console.log('Cookies', localCookie);
+  const modifiedHeaders = new Headers(event.request.headers);
+  modifiedHeaders.set('X-Custom-Header-2', 'A value from service-worker');
+  modifiedHeaders.set('X-Custom-Header-3', 'Another value from service-wroker');
 
-    const newHeader = [...event.request.headers];
+  const modifiedRequest = new Request(event.request.url, {
+    headers: modifiedHeaders,
+  });
 
-    let newReq = new Request(event.request, {
-        headers: {
-          ...event.request.headers,
-          foo: 'bar'
-        }
-      });
-      newReq.headers['My-Custom-Header'] = 'Modified';
-      
+  event.respondWith(
+    fetch(modifiedRequest)
+      .then(function(response) {
+        console.log('Intercepted a fetch request => ', event.request.url);
+        console.log('Request:', modifiedRequest); 
+        console.log('Response:', response); 
+        return response;
+      })
+      .catch(function() {
+        return new Response("Failed to fetch");
+      })
+  );
 
-    // const request = event.request;
-    // const cookieHeader = newReq.headers.set('My-Custom-Cookie');
-    // const customHeader = newReq.headers.set('My-Custom-Header');
-
-    // console.log('Test Cookie from worker', cookieHeader);
-    // console.log('Test Custom header from worker', customHeader);
-
-    event.respondWith(fetch(newReq));
 });
