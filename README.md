@@ -1,4 +1,6 @@
-# web-workers-interceptors
+# Web-Workers with Interceptor
+
+> Using vanilla JS to mount a Service Web-Worker that allow us to intercept 403, modify headers and delete cookies/localStorage
 
 ---
 
@@ -35,9 +37,3 @@ app.listen(3000);
 Run `npm run reverse-proxy` for Express server which has the reverse proxy setup (server.js)
 Run `npm run server` for Angular application at `http://192.168.1.127:8080`
 
----
-
-## Updates
-
-- unregister in place
-- sending messages to service worker
