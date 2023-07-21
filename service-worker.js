@@ -1,6 +1,8 @@
-// runs in the background as a separate thread and intercepts network requests
-// It can modify request headers by intercepting and cloning the request using the Fetch API 
-// in the fetch event listener of the service worker.
+// worker Script
+
+// Web-Workers run isolated on a separate thread and dont have direct access to the DOM, 
+// as Axios need access to the DOM (Axios needs XMLHttpRequest (XHR) object to perform AJAX requests in the browser)
+// they cannot work rogether
 self.addEventListener('fetch', event => {
   
   // WIP
@@ -41,6 +43,6 @@ self.addEventListener('message', event => {
   if (type === 'clientMessage') {
     console.log('Message received in the service worker:', data);
 
-    // hacemos algo con el contenido del mensaje
+    // hacemos algo con el {contenido} del mensaje
   }
 });

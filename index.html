@@ -2,21 +2,22 @@
     <html>
     <head>
         <title></title>
-        <script src="main2.js"></script>
+        <script src="main.js"></script>
     </head>
     <body>
-        <!-- <button>Make a request</button> -->
+        <button>Make a request</button>
+
         <script>
-            // document.querySelector('button').addEventListener('click', function() {
-            //     fetch('https://jsonplaceholder.typicode.com/posts/1', {
-            //         headers: {
-            //         'My-Custom-Header': 'my-custom-header',
-            //         'My-Custom-Delete': 'delete'
-            //         }
-            //     })
-            //     .then(response => response.json());
-            //     document.cookie = "username=John Doe";
-            // });
+            document.querySelector('button').addEventListener('click', function() {
+                fetch('https://jsonplaceholder.typicode.com/posts/1', {
+                    headers: {
+                    'X-Custom-Header-1': 'Value from index.html',
+                    }
+                })
+                .then(response => response.json());
+
+                document.cookie = "username=John Doe";
+            });
         </script>
 
         <button id="unregisterButton">Unregister Service Worker</button>

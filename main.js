@@ -1,20 +1,48 @@
-const worker = new Worker('worker.js');
+// main thread
+const test = document.cookie || 'default';
 
-worker.onmessage = function(event) {
-  if (event.data.error) {
-    console.error('Error en el worker:', event.data.error);
-  } else {
-    console.log('Datos recibidos del worker:', event.data);
-  }
-};
+if ('serviceWorker' in navigator) {
 
-worker.onerror = function(event) {
-  console.error('Error en el worker:', event.message);
-};
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(registration => {
 
-// start thge request worker
-worker.postMessage({
-  url: 'https://jsonplaceholder.typicode.com/posts/1',
-});
-console.log('Message posted to worker');
+          console.log('ServiceWorker scope: ', registration.scope);
 
+          fetch('https://jsonplaceholder.typicode.com/posts/1', {
+            headers: {
+              'X-Custom-Header-1': test
+            }
+          })
+            .then(response => response.json())
+            .then(json => console.log('Fetch response', json));
+
+
+          // unregister manually
+          document.getElementById('unregisterButton').addEventListener('click', () => {
+            registration.unregister().then(function(success) {
+              console.log('Service worker unregistered', success);
+            }).catch(function(error) {
+              console.log('Service worker unregisteration error', error);
+            });
+          });  
+
+    }, (err) => {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+
+  // Communication Interface 
+  // sending message to ww
+  navigator.serviceWorker.ready.then(registration => {
+    console.log('Service Worker registered ok');
+    const message = {
+      type: 'clientMessage',
+      data: test,
+    };
+    registration.active.postMessage(message);
+  }).catch(error => {
+    console.error('Service Worker registration failed', error);
+  });
+
+}
