@@ -11,7 +11,7 @@
             document.querySelector('button').addEventListener('click', function() {
                 fetch('https://jsonplaceholder.typicode.com/posts/1', {
                     headers: {
-                    'X-Custom-Header-1': 'Value from index.html',
+                    'X-Custom-Header-0': 'Value from index.html',
                     }
                 })
                 .then(response => response.json());
