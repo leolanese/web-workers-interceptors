@@ -2,7 +2,7 @@
 
 > Using vanilla JS to mount a Service Web-Worker that allow us to intercept 403, modify headers and delete cookies/localStorage
 
--
+---
 
 ## Reverse Proxy
 
