@@ -8,6 +8,16 @@
         <button>Make a request</button>
 
         <script>
+            const value = 'test-test';
+            const daysToExpire = 7;
+
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + daysToExpire);
+
+            const cookieValue = encodeURIComponent(value) + '; expires=' + expirationDate.toUTCString() + '; path=/';
+            document.cookie = 'aSessionId=' + cookieValue;
+        </script>
+        <script>
             document.querySelector('button').addEventListener('click', function() {
 
                 fetch('http://localhost:3000/services/login-service/v1/login', {
@@ -19,10 +29,7 @@
                     headers: {'Content-Type': 'application/json'}
                 })
                 .then(response => response.json())
-
-                //document.cookie = "username=John Doe";
             });
         </script>
-
     </body>
 </html>
