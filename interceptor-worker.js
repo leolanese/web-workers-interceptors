@@ -38,8 +38,8 @@ self.addEventListener('fetch', function(event) {
         .then(response => {
           console.log('responsse status: ', response.status)      
 
-          if (response?.status === 401 && !!sessionId) {
-            console.log('401 = credentials invalid');
+          if (response?.status === '403' && !!sessionId) {
+            console.log('403 = credentials invalid');
 
             // Sent event to Main.js to delete sessionID
             event.waitUntil(
@@ -51,7 +51,7 @@ self.addEventListener('fetch', function(event) {
                     const client = await self.clients.get(clientId);
                 
                     console.log("service worker: postMessage = " + sessionId);
-                    client.postMessage("401");
+                    client.postMessage('403');
                 })()
             );
           }
