@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "http-server -c-1"
+    "server": "http-server -c-1",
+    "reverse-proxy": "node server.js"
   },
   "keywords": [],
   "author": "",

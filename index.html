@@ -5,11 +5,16 @@
         <script src="main.js"></script>
     </head>
     <body>
+
+        <button id="unregisterButton">Unregister Service Worker</button>
+
+        <hr />
+
         <script>
             document.querySelector('button').addEventListener('click', function() {
                 fetch('https://jsonplaceholder.typicode.com/posts/1', {
                     headers: {
-                    'X-Custom-Header-0': 'Value-0 from indfex.html',
+                    'X-Custom-Header-0': 'Value-0 from index',
                     }
                 })
                 .then(response => response.json());
@@ -20,8 +25,5 @@
 
         <button>Make a request</button>
 
-        <hr />
-
-        <button id="unregisterButton">Unregister Service Worker</button>
     </body>
 </html>
