@@ -21,6 +21,9 @@ server.js
 .settings/
 *.sublime-workspace
 
+# JIC
+index.html
+
 # Visual Studio Code
 .vscode/*
 !.vscode/settings.json
