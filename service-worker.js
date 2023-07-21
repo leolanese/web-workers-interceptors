@@ -1,9 +1,9 @@
-// worker Script
-
+// worker Script running on background thread as the web worker 
+// It intercepts fetch requests + modifies headers + responds to the main thread with the intercepted data using postMessage()
 self.addEventListener('fetch', event => {
   
   // WIP
-  // if (event.request.url.includes('/post/')) {
+  if (event.request.url.includes('/post/')) {
     const modifiedHeaders = new Headers(event.request.headers);
     modifiedHeaders.set('X-Custom-Header-2', 'Value-2 from service-worker');
     modifiedHeaders.set('X-Custom-Header-3', 'Value-3 from service-wroker');
@@ -18,19 +18,12 @@ self.addEventListener('fetch', event => {
       headers: modifiedHeaders,
     });
 
-    event.respondWith(
-      fetch(modifiedRequest)
-        .then(function(response) {
-          console.log('Intercepted a fetch request => ', event.request.url);
-          console.log('Request:', modifiedRequest); 
-          console.log('Response:', response); 
-          return response;
-        })
-        .catch(function() {
-          return new Response("Failed to fetch");
-        })
-    );
-  // }
+  //  event.respondWith(
+
+      
+
+  //  );
+  }
 
 });
 
