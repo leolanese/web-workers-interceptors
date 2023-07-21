@@ -9,7 +9,7 @@
 
         <script>
             const value = 'test-test';
-            const daysToExpire = 7;
+            const daysToExpire = 1;
 
             const expirationDate = new Date();
             expirationDate.setDate(expirationDate.getDate() + daysToExpire);
@@ -18,7 +18,7 @@
             document.cookie = 'aSessionId=' + cookieValue;
         </script>
         <script>
-            document.querySelector('button').addEventListener('click', function() {
+            document.querySelector('button').addEventListener('click', () => {
 
                 fetch('http://localhost:3000/services/login-service/v1/login', {
                     method: 'POST',
@@ -29,6 +29,8 @@
                     headers: {'Content-Type': 'application/json'}
                 })
                 .then(response => response.json())
+                .then(data => console.log('Fetch response =>', data))
+                .catch(error => console.error('Error =>', error.message));
             });
         </script>
     </body>

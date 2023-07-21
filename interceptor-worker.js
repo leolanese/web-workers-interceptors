@@ -36,15 +36,15 @@ self.addEventListener('fetch', event => {
                     : event.clientId;
               const client = await self.clients.get(clientId);
           
-              console.log("service worker: postMessage = " + sessionId);
+              console.log("service worker: postMessage => " + sessionId);
               client.postMessage('403');
             })()
           );
         }
         
         console.log('Intercepted a fetch request => ', request.url);
-        console.log('Request:', request);
-        console.log('Response:', response);
+        console.log('Request => ', request);
+        console.log('Response => ', response);
   
         return response;
       })
