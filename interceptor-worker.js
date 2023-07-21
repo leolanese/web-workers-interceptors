@@ -18,6 +18,40 @@ self.addEventListener('fetch', event => {
   //       })
   //   );
   // } 
+
+  function handleFetchWithSession(request) {
+    return fetch(request)
+      .then(response => {
+        console.log('response status:', response.status);
+        
+        if (response.status === 403 && !!sessionId) {
+          console.log('403 = credentials invalid');
+  
+          // Send event to Main.js to delete sessionId
+          event.waitUntil(
+            (async () => {
+              const clientId =
+                event.resultingClientId !== ""
+                    ? event.resultingClientId
+                    : event.clientId;
+              const client = await self.clients.get(clientId);
+          
+              console.log("service worker: postMessage = " + sessionId);
+              client.postMessage('403');
+            })()
+          );
+        }
+        
+        console.log('Intercepted a fetch request => ', request.url);
+        console.log('Request:', request);
+        console.log('Response:', response);
+  
+        return response;
+      })
+      .catch(function() {
+        return new Response("Failed to fetch");
+      });
+  }
   
   if (event.request.url.includes('/services/')) {
     const modifiedHeaders = new Headers(event.request.headers);
@@ -34,48 +68,13 @@ self.addEventListener('fetch', event => {
 
     event.respondWith(handleFetchWithSession(modifiedRequest));
 
-    function handleFetchWithSession(request) {
-        return fetch(request)
-          .then(response => {
-            console.log('response status:', response.status);
-            
-            if (response.status === 403 && !!sessionId) {
-              console.log('403 = credentials invalid');
-      
-              // Send event to Main.js to delete sessionId
-              event.waitUntil(
-                (async () => {
-                  const clientId =
-                    event.resultingClientId !== ""
-                        ? event.resultingClientId
-                        : event.clientId;
-                  const client = await self.clients.get(clientId);
-              
-                  console.log("service worker: postMessage = " + sessionId);
-                  client.postMessage('403');
-                })()
-              );
-            }
-            
-            console.log('Intercepted a fetch request => ', request.url);
-            console.log('Request:', request);
-            console.log('Response:', response);
-      
-            return response;
-          })
-          .catch(function() {
-            return new Response("Failed to fetch");
-          });
-    }
-
-      // Get sessionID and put it as header
-      // if response is 401 --> send event to main.js and remove sessionId if exist
+    // Get sessionID and put it as header
+    // if response is 401 --> send event to main.js and remove sessionId if exist
   }
+  
 });
 
 onmessage = (e) => {
   console.log('Worker: Message received from main script = ' +  e.data[0]);
- 
   postMessage('Inside Interceptor and gooooo');
-
 }

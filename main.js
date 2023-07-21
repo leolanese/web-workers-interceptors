@@ -11,7 +11,7 @@ if ('serviceWorker' in navigator) {
                 if (event.data === '403') {
                     // 2
                     // removed sessionId from localStorage
-                    console.log('delete sessionId from localStorage')
+                    console.log('delete cookie sessionId')
                     document.cookie = 'sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                 }
             });
