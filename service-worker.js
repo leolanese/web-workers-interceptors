@@ -8,8 +8,8 @@ self.addEventListener('fetch', event => {
   // WIP
   // if (event.request.url.includes('/post/')) {
     const modifiedHeaders = new Headers(event.request.headers);
-    modifiedHeaders.set('X-Custom-Header-2', 'A value from service-worker');
-    modifiedHeaders.set('X-Custom-Header-3', 'Another value from service-wroker');
+    modifiedHeaders.set('X-Custom-Header-2', 'Value-2 from service-worker');
+    modifiedHeaders.set('X-Custom-Header-3', 'Value-3 from service-wroker');
     modifiedHeaders.set('X-Custom-Header-4', 'TO BE DELETED');
 
     // Delete a header
