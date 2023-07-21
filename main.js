@@ -12,7 +12,7 @@ if ('serviceWorker' in navigator) {
                         // 2
                         // removed sessionId from localStorage
                         console.log('delete sessionId from localStorage')
-                        localStorage.removeItem('sessionId');
+                        document.cookie = 'sessionId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                     }
                 });
 
