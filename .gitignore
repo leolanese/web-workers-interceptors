@@ -10,7 +10,6 @@
 /node_modules
 npm-debug.log
 yarn-error.log
-server.js
 
 # IDEs and editors
 .idea/
@@ -20,9 +19,6 @@ server.js
 *.launch
 .settings/
 *.sublime-workspace
-
-# JIC
-index.html
 
 # Visual Studio Code
 .vscode/*
