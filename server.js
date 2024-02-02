@@ -6,8 +6,9 @@ const app = express();
 
 app.use(cors());
 
+// TODO: Update it with the back-end target
 app.use('/services', createProxyMiddleware({ 
-  target: 'https://services.lttwdev.slcom-tws.com', 
+  target: 'https://test.services.com', 
   changeOrigin: true,
   rewrite: (path) => path.replace('^/services', ''),
 }));
