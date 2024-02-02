@@ -66,6 +66,7 @@ app.listen(3000);
 "reverse-proxy": "node server.js"
 ```
 
+// TODO: Update it with the back-end API target
 > now your app is running on: `localhost:8080`, so we have to update your request to: `http://localhost:8080/services/.../login`
 
 ## Servers up and running (this works only under VPN validation)
