@@ -10,7 +10,8 @@ if ('serviceWorker' in navigator) {
 
           console.log('ServiceWorker scope => ', registration.scope);
 
-          // fetch('http://localhost:3000/services/login-service/v1/login', {
+          // TODO: Update it with the back-end target
+          // fetch('http://localhost:3000/services/.../login', {
           //     method: 'POST',
           //     body: JSON.stringify({username:'demo@4null.com',password:'Testing1'}),
           //     headers: {'Content-Type': 'application/json'}
