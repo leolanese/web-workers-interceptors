@@ -54,7 +54,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 
 app.use('/services', createProxyMiddleware({ 
-  target: 'https://services.lttwdev.slcom-tws.com/services', 
+  target: 'https://test.services.com/services', 
   changeOrigin: true 
 }));
 
@@ -66,7 +66,7 @@ app.listen(3000);
 "reverse-proxy": "node server.js"
 ```
 
-> now your app is running on: `localhost:8080`, so we have to update your request to: `http://localhost:8080/services/login-service/v1/login`
+> now your app is running on: `localhost:8080`, so we have to update your request to: `http://localhost:8080/services/.../login`
 
 ## Servers up and running (this works only under VPN validation)
 
