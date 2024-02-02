@@ -19,9 +19,7 @@ self.addEventListener('fetch', event => {
     });
 
   //  event.respondWith(
-
-      
-
+  //    ..
   //  );
   }
 
@@ -33,6 +31,6 @@ self.addEventListener('message', event => {
   if (type === 'clientMessage') {
     console.log('Message received in the service worker:', data);
 
-    // hacemos algo con el {contenido} del mensaje
+    //TODO: Handle the {response} content
   }
 });
